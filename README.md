@@ -56,7 +56,7 @@ Interfaces:
 - org.freedesktop.Woodotool.Manager
 - org.freedesktop.Woodotool.Keyboard
 - org.freedesktop.Woodotool.Mouse
-
+- org.freedesktop.Woodotool.Desktop
 
 Interface descriptions
 ----------------------
@@ -86,6 +86,12 @@ Interface descriptions
       MUST create at least one mouse device or throw an exception on EACCESS
 
       MAY create multiple objects if called repeatedly
+
+    - ***`GetDesktop(String name) -> object`***
+
+      Service returns the singleton object implementing the
+      **org.freedesktop.Woodotool.Mouse** interface. Only one object
+      implementing this service exists.
 
 - **`org.freedesktop.Woodotool.Keyboard`**
   - Properties:
@@ -134,3 +140,18 @@ Interface descriptions
 
     - **`Release(uint32 code) -> ()`**
         Release the button with the given evdev code (e.g. BTN_LEFT)
+
+- **`org.freedesktop.Woodotool.Desktop`**
+  - Signals
+
+    - **`Edge(enum edge)`**
+        Signals that the pointer has hit an edge or corner. Valid arguments
+        are `top` (0), `bottom` (1), `left` (2), `right` (3) for edges and
+        `top-left` (4), `bottom-left` (5), `top-right` (6) and
+        `bottom-right` (7) for corners.
+
+        It is up to the Compositor to decide where the edge stops and the
+        corner starts.
+
+        It is up to the Compositor to decide which corners are active. For
+        the top-left trigger may only signal on the primary display.
