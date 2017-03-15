@@ -55,6 +55,7 @@ Interfaces:
 
 - org.freedesktop.Woodotool.Manager
 - org.freedesktop.Woodotool.Keyboard
+- org.freedesktop.Woodotool.Mouse
 
 
 Interface descriptions
@@ -75,6 +76,17 @@ Interface descriptions
       MUST create at least one keyboard or throw an exception on EACCESS
 
       MAY create multiple objects if called repeatedly
+
+    - ***`GetMouse(String name) -> object`***
+
+      Service creates a new object implementing
+      **org.freedesktop.Woodotool.Mouse** interface for the
+      requesting process.
+
+      MUST create at least one mouse device or throw an exception on EACCESS
+
+      MAY create multiple objects if called repeatedly
+
 - **`org.freedesktop.Woodotool.Keyboard`**
   - Properties:
 
@@ -100,3 +112,25 @@ Interface descriptions
 
         Emulate key release event for the key with the given keycode. If the
         key is already up, nothing happens.
+
+- **`org.freedesktop.Woodotool.Mouse`**
+  - Properties:
+
+    - **`Name (String)`**
+      Compositor-assigned name, for human consumption/debugging only
+
+  - Methods
+
+    - **`MoveRelative(int x, int y) -> ()`**
+        Moves the pointer by the given distance in logical pixels. Note that
+        in High-DPI screen a logical pixel may differ to a physical pixel.
+
+    - **`MoveAbsolute(int x, int y) -> ()`**
+        Moves the pointer to the given location in logical pixels. Note that
+        in High-DPI screen a logical pixel may differ to a physical pixel.
+
+    - **`Press(uint32 code) -> ()`**
+        Press the button with the given evdev code (e.g. BTN_LEFT)
+
+    - **`Release(uint32 code) -> ()`**
+        Release the button with the given evdev code (e.g. BTN_LEFT)
