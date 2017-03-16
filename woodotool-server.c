@@ -29,7 +29,7 @@ DEFINE_TRIVIAL_CLEANUP_FUNC(struct xkb_context *, xkb_context_unref);
 static inline void freep(void *p) { free(*(void**)p); }
 
 #define PATH_PREFIX "/org/freedesktop/WooDoTool1"
-#define NAME_PREFIX "org.freedesktop.wooDoTool1"
+#define NAME_PREFIX "org.freedesktop.WooDoTool1"
 
 struct wdt_keyboard {
     char *path;
