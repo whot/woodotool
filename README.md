@@ -36,17 +36,21 @@ screen is active.
 Security considerations
 -----------------------
 
-One of the drawbacks of the XTest interface is that there is no reasonable
-way to restrict the applications that can fake input events. Moving to a
-dbus-based interface allows identifying the client endpoint and thus the PID
-of the calling process. The split into separate sub-interfaces allows
-clients to be further restricted to a specific feature set in a discoverable
-manner.
+One of the drawbacks of the XTest interface is that it provides no way to
+restrict the applications that can fake input events. Moving to a dbus-based
+interface allows identifying the client endpoint and thus the PID of the
+calling process. Going beyond this is an unsolved problem. Per-process
+permissions are not available with DBus existing tools.
 
-Client restriction could be implemented by a whitelist of permitted process
-that may use some DBus interfaces. Configuration of this whitelist is
-out of scope of this protocol. How dbus clients are matched with the
-whitelist is out of scope of this protocol.
+A pre-shared key between the appliation and the compositor requires
+considerations in the API and provides minimal extra security - all clients
+and the compositor need to avoid keeping the key unencrypted in memory.
+
+Configuration of any filtering is out of scope of this protocol. How dbus
+clients are matched with the whitelist is out of scope of this protocol.
+
+The split into separate sub-interfaces allows clients to be
+restricted to a specific feature set in a discoverable manner.
 
 WooDoTool DBus Interface
 ========================
